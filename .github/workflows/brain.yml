@@ -1,0 +1,16 @@
+name: EGO_BRAIN_SERVER
+on: [workflow_dispatch] # กดรันเองในหน้า Actions
+
+jobs:
+  run-ai:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install AI Engine
+        run: |
+          pip install flask llama-cpp-python pyngrok
+          # สั่งโหลดสมอง AI มาไว้ที่ GitHub (ไม่ต้องอัพเอง)
+          wget https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/main/qwen2.5-7b-instruct-q4_k_m.gguf -O brain_model.gguf
+      - name: Start Server
+        run: python server.py
+        
